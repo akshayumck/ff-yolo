@@ -1,4 +1,4 @@
-import '../backend/backend.dart';
+import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
@@ -62,8 +62,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   hello: 'hey',
                 ),
               ),
-              FutureBuilder<int>(
-                future: queryMoviesRecordCount(),
+              FutureBuilder<ApiCallResponse>(
+                future: TodosCall.call(),
                 builder: (context, snapshot) {
                   // Customize what your widget looks like when it's loading.
                   if (!snapshot.hasData) {
@@ -77,12 +77,30 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       ),
                     );
                   }
-                  int listViewCount = snapshot.data!;
+                  final listViewTodosResponse = snapshot.data!;
                   return ListView(
                     padding: EdgeInsets.zero,
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
-                    children: [],
+                    children: [
+                      ListTile(
+                        title: Text(
+                          'Lorem ipsum dolor...',
+                          style: FlutterFlowTheme.of(context).title3,
+                        ),
+                        subtitle: Text(
+                          'Lorem ipsum dolor...',
+                          style: FlutterFlowTheme.of(context).subtitle2,
+                        ),
+                        trailing: Icon(
+                          Icons.arrow_forward_ios,
+                          color: Color(0xFF303030),
+                          size: 20,
+                        ),
+                        tileColor: Color(0xFFF5F5F5),
+                        dense: false,
+                      ),
+                    ],
                   );
                 },
               ),
